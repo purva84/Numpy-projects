@@ -1,0 +1,121 @@
+ **Quality Metrics Analysis Project** 
+
+> 🎧 **Wireless Earbuds** (a trending and precision-based consumer tech product)
+
+## 🧾 Python Project: Quality Control Metrics – *Wireless Earbuds Manufacturing*
+
+import numpy as np
+
+# ----------------------------
+# 📦 Production Data Setup
+# ----------------------------
+
+# 10 batches, 100 units per batch
+units_per_batch = 100
+batches = 10
+total_units = units_per_batch * batches
+
+# Manual fake data - inspection results for each batch (1 = Pass, 0 = Defect)
+inspection_results = np.array([
+    [1]*98 + [0]*2,
+    [1]*97 + [0]*3,
+    [1]*96 + [0]*4,
+    [1]*98 + [0]*2,
+    [1]*99 + [0]*1,
+    [1]*96 + [0]*4,
+    [1]*97 + [0]*3,
+    [1]*95 + [0]*5,
+    [1]*98 + [0]*2,
+    [1]*97 + [0]*3
+])
+
+# Rework and Scrap items per batch (manually added realistic data)
+rework_counts = np.array([1, 2, 2, 1, 1, 3, 2, 3, 1, 2])
+scrap_counts = np.array([1, 1, 2, 1, 0, 1, 1, 2, 1, 1])
+
+# Customer complaints and return data
+customer_complaints = np.array([0, 1, 1, 0, 0, 1, 1, 2, 0, 1])
+returns = np.array([1, 1, 2, 1, 0, 2, 1, 3, 1, 1])
+
+# Failures during use (for MTBF)
+failures = np.array([5, 4, 6, 3, 2, 4, 3, 5, 3, 4])
+operational_days = 180
+
+# ----------------------------
+# 📊 Quality Metrics Calculation
+# ----------------------------
+
+# ✅ 1. Defect Rate
+defect_rate = 1 - np.sum(inspection_results) / total_units
+
+# ✅ 2. First Pass Yield (FPY)
+fpy = np.mean(np.sum(inspection_results, axis=1) / units_per_batch)
+
+# ✅ 3. Rework Rate
+rework_rate = np.sum(rework_counts) / total_units
+
+# ✅ 4. Scrap Rate
+scrap_rate = np.sum(scrap_counts) / total_units
+
+# ✅ 5. Customer Complaint Rate
+complaint_rate = np.sum(customer_complaints) / total_units
+
+# ✅ 6. Return Rate
+return_rate = np.sum(returns) / total_units
+
+# ✅ 7. Mean Time Between Failures (MTBF)
+mean_mtbf = operational_days / np.mean(failures)
+
+# ✅ 8. Process Capability (Dummy Cp, Cpk Example)
+# Assume spec limits: Lower = 95, Upper = 105, Mean = 100, std = 3
+USL, LSL = 105, 95
+process_std = 3
+process_mean = 100
+cp = (USL - LSL) / (6 * process_std)
+cpk = min((USL - process_mean), (process_mean - LSL)) / (3 * process_std)
+
+# ✅ 9. Inspection Coverage
+inspection_coverage = 1.0  # 100% inspection
+
+# ----------------------------
+# 📤 Results Summary
+# ----------------------------
+
+print("🎧 Wireless Earbuds - Quality Control Report")
+print("Defect Rate: {:.2%}".format(defect_rate))
+print("First Pass Yield (FPY): {:.2%}".format(fpy))
+print("Rework Rate: {:.2%}".format(rework_rate))
+print("Scrap Rate: {:.2%}".format(scrap_rate))
+print("Customer Complaint Rate: {:.2%}".format(complaint_rate))
+print("Return Rate: {:.2%}".format(return_rate))
+print("Mean Time Between Failures (MTBF): {:.2f} days".format(mean_mtbf))
+print("Process Capability (Cp): {:.2f}".format(cp))
+print("Process Capability Index (Cpk): {:.2f}".format(cpk))
+print("Inspection Coverage: {:.2%}".format(inspection_coverage))
+
+
+## 📘 Business Insights & Learnings
+
+| 🔍 Metric                   | 💼 Insight                                                  |
+| --------------------------- | ----------------------------------------------------------- |
+| **Defect Rate**             | Very low defect rate (\~2-3%) → Great production quality.   |
+| **FPY**                     | Over 96% units pass without rework → Efficient process.     |
+| **Rework Rate**             | Small rework needed; can still aim to reduce.               |
+| **Scrap Rate**              | Minimal waste — good for profitability and sustainability.  |
+| **Complaint & Return Rate** | Below 2% — strong customer satisfaction.                    |
+| **MTBF**                    | High reliability (\~40+ days before failure on average).    |
+| **Cp, Cpk**                 | Values >1.33 mean process is well within control limits.    |
+| **Inspection Coverage**     | 100% inspection builds trust and ensures consistent output. |
+
+---
+
+## 🧠 Why It Matters in Real Business
+
+* **Product Reliability**: MTBF helps predict warranty issues and design better products.
+* **Customer Trust**: Low returns & complaints signal brand quality.
+* **Cost Savings**: Low scrap/rework reduces hidden losses.
+* **Decision-Making**: High Cp/Cpk means the process doesn’t need urgent improvement, saving investment.
+
+---
+
+
