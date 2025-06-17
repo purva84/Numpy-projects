@@ -9,8 +9,8 @@ import numpy as np
 # ----------------------------
 # 📦 Production Data Setup
 # ----------------------------
-
 # 10 batches, 100 units per batch
+
 units_per_batch = 100
 batches = 10
 total_units = units_per_batch * batches
@@ -29,7 +29,7 @@ inspection_results = np.array([
     [1]*97 + [0]*3
 ])
 
-# Rework and Scrap items per batch (manually added realistic data)
+# Rework and Scrap items per batch 
 rework_counts = np.array([1, 2, 2, 1, 1, 3, 2, 3, 1, 2])
 scrap_counts = np.array([1, 1, 2, 1, 0, 1, 1, 2, 1, 1])
 
@@ -107,7 +107,7 @@ print("Inspection Coverage: {:.2%}".format(inspection_coverage))
 | **Cp, Cpk**                 | Values >1.33 mean process is well within control limits.    |
 | **Inspection Coverage**     | 100% inspection builds trust and ensures consistent output. |
 
----
+
 
 ## 🧠 Why It Matters in Real Business
 
@@ -116,6 +116,5 @@ print("Inspection Coverage: {:.2%}".format(inspection_coverage))
 * **Cost Savings**: Low scrap/rework reduces hidden losses.
 * **Decision-Making**: High Cp/Cpk means the process doesn’t need urgent improvement, saving investment.
 
----
 
 
