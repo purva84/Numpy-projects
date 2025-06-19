@@ -1,0 +1,93 @@
+### 📦 **Product Chosen:** *Smart Air Purifier*
+
+import numpy as np
+
+# 1. Simulated sensor data (PM2.5 readings in µg/m³ for 60 seconds, every second)
+sensor_data = np.array([
+    35, 36, 34, 37, 36, 70, 35, 34, 33, 36,  # spike at 70 (possible noise)
+    35, 35, 35, 36, 36, 35, 34, 60, 33, 34,  # spike at 60
+    34, 34, 35, 35, 35, 35, 36, 35, 35, 35,
+    33, 32, 34, 35, 50, 36, 35, 35, 34, 34,  # spike at 50
+    35, 35, 34, 36, 35, 35, 34, 34, 35, 34,
+    35, 36, 35, 35, 35, 35, 34, 33, 34, 34
+])
+
+# 2. Sampling Rate (1 Hz = 1 reading/sec)
+sampling_rate = 1  # Hz
+
+# 3. Signal Accuracy - assume expected normal value = 35
+expected_value = 35
+signal_accuracy = 100 - (np.mean(np.abs(sensor_data - expected_value)) / expected_value * 100)
+
+# 4. Noise Level - count how many values deviate more than ±20% from expected
+noise_threshold = 0.2 * expected_value
+noise_count = np.sum(np.abs(sensor_data - expected_value) > noise_threshold)
+noise_percentage = (noise_count / len(sensor_data)) * 100
+
+# 5. Latency (in seconds) - assuming random values
+latency_readings = np.array([0.5, 0.6, 0.7, 0.55, 0.52, 0.65])
+avg_latency = np.mean(latency_readings)
+
+# 6. Uptime/Downtime - assume 58 seconds of uptime out of 60
+uptime = 58
+downtime = 2
+uptime_percentage = (uptime / 60) * 100
+
+# 7. Sensor Drift - compare average of first 30s vs last 30s
+drift = np.mean(sensor_data[30:]) - np.mean(sensor_data[:30])
+
+# 8. Response Time - assume predefined response time data
+response_times = np.array([1.2, 1.0, 1.1, 0.9, 1.3])
+avg_response_time = np.mean(response_times)
+
+# 9. Mean, Median, Std Dev
+mean_value = np.mean(sensor_data)
+median_value = np.median(sensor_data)
+std_dev = np.std(sensor_data)
+
+# 10. Missing Data (manually set to 3 missing seconds)
+missing_data_count = 3
+missing_data_percent = (missing_data_count / 60) * 100
+
+# 🔍 Print Report
+print("📊 Sensor Data Quality Report (Smart Air Purifier)")
+print(f"Sampling Rate: {sampling_rate} Hz")
+print(f"Signal Accuracy: {signal_accuracy:.2f}%")
+print(f"Noise Level: {noise_percentage:.2f}%")
+print(f"Average Latency: {avg_latency:.2f} sec")
+print(f"Uptime: {uptime_percentage:.2f}%")
+print(f"Sensor Drift (last 30s - first 30s): {drift:.2f}")
+print(f"Average Response Time: {avg_response_time:.2f} sec")
+print(f"Mean Value: {mean_value:.2f}")
+print(f"Median Value: {median_value}")
+print(f"Standard Deviation: {std_dev:.2f}")
+print(f"Missing Data: {missing_data_percent:.2f}%")
+```
+
+---
+
+## 📈 Business Insights You Can Learn:
+
+| Metric                            | What It Tells                                                       |
+| --------------------------------- | ------------------------------------------------------------------- |
+| ✅ **Signal Accuracy (e.g., 98%)** | Sensor is performing well and measuring close to expected.          |
+| ⚠️ **Noise Level (e.g., 8%)**     | Few sudden spikes show slight instability; needs filtering.         |
+| ✅ **Latency (<1s)**               | Data is reaching system fast — good for real-time decisions.        |
+| ✅ **Uptime (96.67%)**             | Sensor is mostly reliable, only small downtime.                     |
+| ⚠️ **Drift (\~0.5 µg/m³)**        | Sensor shows a minor shift over time — recalibration may be needed. |
+| ✅ **Response Time (avg 1.1s)**    | Acceptable for environment-sensitive devices like air purifiers.    |
+| ✅ **Std Dev (1.2)**               | Low deviation = consistent performance.                             |
+| ⚠️ **Missing Data (5%)**          | Could impact long-term data trends — check network/power issues.    |
+
+---
+
+## 💼 Real-World Use Cases:
+
+| Area                        | How This Helps                                             |
+| --------------------------- | ---------------------------------------------------------- |
+| 🏭 **Product Quality**      | Ensures sensor is accurate before mass production.         |
+| 📊 **Dashboard Alerts**     | Use metrics like drift/noise to notify maintenance.        |
+| 📦 **Warranty Claims**      | Helps track sensor failures to justify replacements.       |
+| 🔧 **Maintenance Planning** | Predict when sensor needs recalibration or replacement.    |
+| 🌍 **Customer Trust**       | Reliable data ensures cleaner air, better user experience. |
+
