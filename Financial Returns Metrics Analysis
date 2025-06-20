@@ -1,0 +1,100 @@
+💼 Project: Financial Metrics Analysis of HDFC Bank
+
+import numpy as np
+
+# Simulated Financial Data for HDFC Bank (values in crores)
+net_income = 30_000           # Net profit
+total_assets = 1_200_000      # Total assets
+shareholder_equity = 500_000  # Equity capital
+interest_income = 85_000
+interest_expense = 55_000
+dividend = 25                 # Per share (₹)
+share_price = 1500            # Current market price
+initial_value = 1300          # Initial share value 3 years ago
+final_value = 1500            # Current share value
+investment_period_years = 3
+initial_investment = 100_000
+final_investment = 145_000
+returns = np.array([12, 14, 16])  # Yearly % returns
+
+# ROI = (Gain / Cost) * 100
+roi = ((final_investment - initial_investment) / initial_investment) * 100
+
+# ROA = Net Income / Total Assets
+roa = net_income / total_assets
+
+# ROE = Net Income / Shareholders’ Equity
+roe = net_income / shareholder_equity
+
+# NIM = (Interest Income - Interest Expense) / Assets
+nim = (interest_income - interest_expense) / total_assets
+
+# Annualized Return
+annualized_return = ((final_investment / initial_investment) ** (1/investment_period_years)) - 1
+
+# CAGR = (Final Value / Initial Value)^(1/n) - 1
+cagr = (final_value / initial_value) ** (1/investment_period_years) - 1
+
+# Dividend Yield = (Dividend / Share Price) * 100
+dividend_yield = (dividend / share_price) * 100
+
+# Sharpe Ratio = (Mean Return - Risk-free rate) / Std Dev
+risk_free_rate = 6
+sharpe_ratio = (np.mean(returns) - risk_free_rate) / np.std(returns)
+
+# Capital Gains = Final - Initial
+capital_gains = final_value - initial_value
+
+# Total Return = Capital Gains + Dividends
+total_return = capital_gains + dividend
+
+# Print Results
+print("📊 Financial Metrics for HDFC Bank:")
+print(f"✅ ROI: {roi:.2f}%")
+print(f"✅ ROA: {roa:.4f}")
+print(f"✅ ROE: {roe:.4f}")
+print(f"✅ NIM: {nim:.4f}")
+print(f"✅ Annualized Return: {annualized_return*100:.2f}%")
+print(f"✅ CAGR: {cagr*100:.2f}%")
+print(f"✅ Dividend Yield: {dividend_yield:.2f}%")
+print(f"✅ Sharpe Ratio: {sharpe_ratio:.2f}")
+print(f"✅ Capital Gains: ₹{capital_gains}")
+print(f"✅ Total Return (incl. dividend): ₹{total_return}")
+
+💼 How Businesses Use This:
+Use Case	Application
+Investor Report	Highlights ROI, ROE, and CAGR for potential shareholders
+Strategic Decision Making	Sharpe ratio and NIM help identify whether to shift investment strategy
+Dividend Planning	Dividend yield guides payout decisions
+Financial Health Check	ROA and ROE give a quick health snapshot to management
+Risk Analysis	Sharpe ratio highlights reward vs. volatility
+
+
+| **Metric**                      | **Value**        | **What It Means in Simple Terms**                                                                |
+| ------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------ |
+| ✅ **ROI: 45.00%**               | 📈 Excellent     | For every ₹100 invested, you gained ₹45. A high return shows strong investment profitability.    |
+| ✅ **ROA: 0.0250**               | 💼 Moderate      | HDFC generates ₹2.5 profit for every ₹100 of assets. Shows efficiency in using its total assets. |
+| ✅ **ROE: 0.0600**               | 📊 Average       | ₹6 profit for every ₹100 of shareholders’ money. Measures how well equity is being used.         |
+| ✅ **NIM: 0.0250**               | 🏦 Normal        | Makes 2.5% profit on lending — healthy for a bank. Higher NIM means efficient lending.           |
+| ✅ **Annualized Return: 13.19%** | 🔄 Good          | You earned \~13.19% per year from your investment. Good growth over time.                        |
+| ✅ **CAGR: 4.89%**               | 📉 Conservative  | Average yearly growth is 4.89%. Not very aggressive — could improve.                             |
+| ✅ **Dividend Yield: 1.67%**     | 💵 Low but safe  | Investors earn ₹1.67 annually for every ₹100 invested in the stock as income.                    |
+| ✅ **Sharpe Ratio: 4.90**        | 🔥 Excellent     | Very high risk-adjusted return. Anything >1 is good; >3 is superb.                               |
+| ✅ **Capital Gains: ₹200**       | 💰 Strong        | ₹200 earned just from increase in share price — profit from appreciation.                        |
+| ✅ **Total Return: ₹225**        | 📦 Complete View | Includes ₹200 capital gain + ₹25 dividend. Gives full profit picture.                            |
+
+### 🧠 **What an Analyst or Owner Would Conclude:**
+
+1. **Profitable Investment**: A 45% ROI and high Sharpe ratio shows this was a very smart and safe investment.
+2. **Safe and Efficient Bank**: Healthy NIM and stable ROA/ROE indicate HDFC is operating well, using its assets and equity effectively.
+3. **Could Improve Dividend or Growth**: The dividend yield is low, and CAGR is slightly below market expectations — may need to boost future returns.
+4. **Great for Long-Term Investors**: With steady annualized returns and low risk, HDFC Bank is a stable long-term holding.
+
+### 💡 Business Recommendation:
+
+* 📢 Promote the bank as a **low-risk, high-efficiency** investment option.
+* 📈 Improve **growth and dividend strategy** to attract aggressive investors.
+* 🧾 Use this data for presentations, investor meetings, or financial strategy discussions.
+
+
+
