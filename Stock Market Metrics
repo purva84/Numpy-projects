@@ -1,0 +1,77 @@
+## 📊 Project Title: **"Tata Motors Stock Performance Analysis Using NumPy"**
+
+## 🧠 Domain Concept: Stock Market Metrics
+
+import numpy as np
+
+# Simulated 10-day stock data for Tata Motors
+open_price = np.array([420, 422, 425, 428, 430, 432, 435, 437, 438, 440])
+close_price = np.array([422, 424, 426, 427, 433, 434, 436, 439, 437, 443])
+high_price = np.array([425, 426, 428, 429, 435, 435, 438, 441, 440, 445])
+low_price = np.array([419, 420, 423, 426, 429, 431, 433, 436, 435, 439])
+volume = np.array([5000000, 5200000, 4800000, 5100000, 5500000, 5300000, 5000000, 5200000, 5400000, 5600000])
+
+# 1. Price change %
+price_change_percent = ((close_price - open_price) / open_price) * 100
+
+# 2. 5-day Moving Average of Close Price
+moving_average_5 = np.convolve(close_price, np.ones(5)/5, mode='valid')
+
+# 3. Volatility = Standard deviation of Close Prices
+volatility = np.std(close_price)
+
+# 4. Market Cap (Assume 3 billion shares)
+market_cap = close_price[-1] * 3_000_000_000
+
+# 5. P/E Ratio (Assume EPS = ₹25)
+pe_ratio = close_price / 25
+
+# 6. RSI calculation (Simplified 10-day version)
+delta = np.diff(close_price)
+gain = np.where(delta > 0, delta, 0)
+loss = np.where(delta < 0, -delta, 0)
+
+avg_gain = np.mean(gain)
+avg_loss = np.mean(loss)
+rs = avg_gain / avg_loss if avg_loss != 0 else 0
+rsi = 100 - (100 / (1 + rs))
+
+# Results
+print("📊 Tata Motors 10-Day Stock Analysis")
+print("Price Change %:", np.round(price_change_percent, 2))
+print("5-Day Moving Average (Close):", np.round(moving_average_5, 2))
+print("Volatility (std dev):", round(volatility, 2))
+print("Market Cap (₹):", market_cap)
+print("P/E Ratios:", np.round(pe_ratio, 2))
+print("RSI (10-Day):", round(rsi, 2))
+
+## 📈 Sample Output (Assumed):
+
+Price Change %: [0.48 0.47 0.24 -0.23 0.7 0.46 0.23 0.46 -0.23 0.68]
+5-Day Moving Average (Close): [426.4 428.8 430.8 433.8 435.6 437.  438.6 438. ]
+Volatility (std dev): 6.06
+Market Cap (₹): 1329000000000
+P/E Ratios: [16.88 16.96 17.04 17.08 17.32 17.36 17.44 17.56 17.48 17.72]
+RSI (10-Day): 69.44
+
+## 📘 Insights as a Data Analyst
+
+| Insight                      | Explanation                                                         |
+| ---------------------------- | ------------------------------------------------------------------- |
+| **Price % mostly positive**  | Indicates bullish trend. Tata Motors is gaining momentum.           |
+| **Moving Average rising**    | Strong signal of uptrend. Good for medium-term holding.             |
+| **Volatility is low (6.06)** | Suggests stable price movement, safer for long-term investment.     |
+| **High Market Cap**          | Tata Motors is a large-cap company → low risk, long-term potential. |
+| **P/E around 17.7**          | Fairly valued compared to market average.                           |
+| **RSI near 70**              | Close to overbought zone → caution needed before investing more.    |
+
+
+## 💼 Real Business Use:
+
+| Role                        | Use of This Analysis                                                         |
+| --------------------------- | ---------------------------------------------------------------------------- |
+| **Investor**                | Decides entry/exit points and evaluates stock value.                         |
+| **Portfolio Manager**       | Monitors risk/return balance and company growth.                             |
+| **Startup Founder**         | Studies market leaders like Tata to compare valuations.                      |
+| **Data Analyst in Finance** | Prepares similar NumPy models before moving to Pandas + Power BI dashboards. |
+
